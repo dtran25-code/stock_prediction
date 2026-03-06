@@ -84,11 +84,11 @@ def get_bitcoin_historical_prices(days = 60):
     data = response.json()
     # Try common key names the API might use
     prices = data['prices']
-    raise KeyError(f"Unexpected API response keys: {list(data.keys())}")
     df = pd.DataFrame(prices, columns=['Timestamp', 'Close Price (USD)'])
     df['Date'] = pd.to_datetime(df['Timestamp'], unit='ms').dt.normalize()
     df = df[['Date', 'Close Price (USD)']].set_index('Date')
     return df
+
 
 
 
