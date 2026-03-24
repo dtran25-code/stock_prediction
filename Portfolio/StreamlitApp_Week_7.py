@@ -60,8 +60,8 @@ MODEL_INFO = {
         "endpoint": aws_endpoint,
         "explainer": 'explainer_pair.shap',
         "pipeline": 'finalized_pair_model.tar.gz',
-        "keys": ["AREC", "NEM"],
-        "inputs": [{"name": k, "type": "number", "min": 0.0, "default": 0.0, "step": 10.0} for k in ["AREC", "NEM"]]
+        "keys": ["AMZN", "NVDA"],
+        "inputs": [{"name": k, "type": "number", "min": 0.0, "default": 0.0, "step": 10.0} for k in ["AMZN", "NVDA"]]
 }
 
 def load_pipeline(_session, bucket, key):
