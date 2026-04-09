@@ -104,21 +104,21 @@ def convert_input_pca_regression(request_body, request_content_type):
         X = FeatureEngineer(windows=[10,15]).transform(dataset[[target]])
     
         techIndicator_1 = 'EMA_25'
-        RSI_15 = json.loads(request_body)[techIndicator_1]
+        EMA_25 = json.loads(request_body)[techIndicator_1]
         techIndicator_2 = 'ROC_30'
-        MOM_15 = json.loads(request_body)[techIndicator_2]
+        ROC_30 = json.loads(request_body)[techIndicator_2]
 
         # Calculate the distance
         distances = np.sqrt(
-            (X[techIndicator_1] - RSI_15)**2 + 
-            (X[techIndicator_2] - MOM_15)**2
+            (X[techIndicator_1] - EMA_25)**2 + 
+            (X[techIndicator_2] - ROC_30)**2
         )
         
         closest_index = distances.idxmin()
         closest_row = X.loc[[closest_index]]
     
-        closest_row[techIndicator_1] = RSI_15
-        closest_row[techIndicator_2] = MOM_15
+        closest_row[techIndicator_1] = EMA_25
+        closest_row[techIndicator_2] = ROC_30
     
         return closest_row
     else:
