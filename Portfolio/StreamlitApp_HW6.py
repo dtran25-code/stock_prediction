@@ -64,7 +64,7 @@ MODEL_INFO = {
         "explainer": 'explainer_sentiment.shap',
         "pipeline": 'finalized_sentiment_model.tar.gz',
         "keys": ['AMZN','JPM','FB','PredictedSentiment'],
-        "inputs": [{"name": k, "type": "number", "min": -1.0, "max": 1.0, "default": 0.0, "step": 0.01} for k in ['AMZN','JPM','FB','sentiment_textblob']]
+        "inputs": [{"name": k, "type": "number", "min": -1.0, "max": 1.0, "default": 0.0, "step": 0.01} for k in ['AMZN','JPM','FB','PredictedSentiment']]
 }
 
 def load_pipeline(_session, bucket, key):
