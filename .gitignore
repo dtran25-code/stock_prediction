@@ -1,0 +1,20 @@
+# Streamlit / AWS local secrets — NEVER commit
+.streamlit/secrets.toml
+.aws/credentials
+*.env
+
+# Python build / cache
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# Smoke-test / staging scripts (kept on disk but not part of the published repo)
+_stage_*.py
+
+# Stage-D spot-check renders (the notebook re-renders these inline)
+_stage_d_*.png
+
+# IDE
+.vscode/
+.idea/

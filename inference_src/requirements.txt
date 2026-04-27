@@ -1,0 +1,6 @@
+# Pinned to match the versions the pipeline was trained with so unpickling
+# resolves cleanly on the SageMaker SKLearn container.
+scikit-learn==1.7.2
+imbalanced-learn>=0.14
+sklearn-compat
+category_encoders>=2.6
