@@ -103,12 +103,20 @@ def load_template_row():
     """Return one merged transaction+identity row, dropped of `isFraud`."""
     p = PROJECT_ROOT / "_template_row.csv"
     if p.exists():
-        return pd.read_csv(p)
-    # Fallback: merge on the fly from the raw CSVs (slower).
-    tt = pd.read_csv(PROJECT_ROOT / "train_transaction.csv", nrows=1)
-    ti = pd.read_csv(PROJECT_ROOT / "train_identity.csv")
-    row = tt.merge(ti, on="TransactionID", how="left").drop(columns=["isFraud"])
-    return row.head(1)
+        df = pd.read_csv(p)
+    else:
+        tt = pd.read_csv(PROJECT_ROOT / "train_transaction.csv", nrows=1)
+        ti = pd.read_csv(PROJECT_ROOT / "train_identity.csv")
+        df = tt.merge(ti, on="TransactionID", how="left").drop(columns=["isFraud"]).head(1)
+
+    # Force object dtype on the categorical inputs the user can change.
+    # Without this, columns whose only template value is NaN load as
+    # float64 and refuse string assignments like "gmail.com".
+    string_cols = [u["name"] for u in USER_INPUTS if u["type"] == "select"]
+    for col in string_cols:
+        if col in df.columns:
+            df[col] = df[col].astype(object)
+    return df
 
 # ── User input config — picked for fraud relevance & user-friendliness ─────
 USER_INPUTS = [
